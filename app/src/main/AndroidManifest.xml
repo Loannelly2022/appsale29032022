@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppSale29032022">
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation.view.activity.sign_in.SignInActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
