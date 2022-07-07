@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity {
 
+    @Inject
     Xehoi xehoi;
 
     @Override
@@ -20,9 +21,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         AppComponent appComponent = DaggerAppComponent.builder().build();
+        appComponent.injectMainActivity(this);
 
-        xehoi = appComponent.getXehoi();
+        Log.d("BBB", xehoi.toString());
 
-        Log.d("BBB",xehoi.toString());
     }
 }

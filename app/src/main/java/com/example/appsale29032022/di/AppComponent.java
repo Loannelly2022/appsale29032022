@@ -1,5 +1,6 @@
 package com.example.appsale29032022.di;
 
+import com.example.appsale29032022.MainActivity;
 import com.example.appsale29032022.Xehoi;
 
 import dagger.Component;
@@ -10,7 +11,8 @@ import dagger.Component;
 
 @Component(modules = XehoiModule.class)
 public interface AppComponent {
-    Xehoi getXehoi();
+
+    void injectMainActivity(MainActivity mainActivity);
 
     @Component.Builder
     interface Builder {
