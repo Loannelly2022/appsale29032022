@@ -17,7 +17,6 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
         navigateToDestination();
     }
 
@@ -30,8 +29,8 @@ public class SplashActivity extends AppCompatActivity {
                 intent = new Intent(SplashActivity.this, OnboardDingActivity.class);
             }
             startActivity(intent);
-//            overridePendingTransition()
             finish();
+            overridePendingTransition(R.anim.alpha_fade_in, R.anim.alpha_fade_out);
         }, AppConstant.TIME_MILLISECOND_DELAY);
     }
 }
