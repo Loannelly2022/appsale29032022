@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.example.appsale29032022.R;
 
-public class OnboardingActivity extends AppCompatActivity {
+public class OnboardDingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,9 +1,15 @@
 package com.example.appsale29032022.presentation.view.activity.splash;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+
 import com.example.appsale29032022.R;
+import com.example.appsale29032022.common.AppConstant;
 import com.example.appsale29032022.data.local.AppCache;
+import com.example.appsale29032022.presentation.view.activity.onboard.OnboardDingActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -11,9 +17,21 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        navigateToDestination();
     }
 
     private void navigateToDestination() {
-
+        new Handler().postDelayed(() -> {
+            Boolean isFirstTimeDisplay = (Boolean) AppCache.getInstance(SplashActivity.this)
+                    .getValue(AppConstant.ONBOARD_DING_FIRST_TIME_DISPLAY_KEY);
+            Intent intent = null;
+            if (isFirstTimeDisplay == null || !isFirstTimeDisplay) {
+                intent = new Intent(SplashActivity.this, OnboardDingActivity.class);
+            }
+            startActivity(intent);
+//            overridePendingTransition()
+            finish();
+        }, AppConstant.TIME_MILLISECOND_DELAY);
     }
 }

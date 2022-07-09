@@ -6,11 +6,7 @@ package com.example.appsale29032022.data.local;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.appsale29032022.common.AppConstant;
-
 import java.util.Map;
 
 /**
@@ -68,7 +64,7 @@ public class AppCache {
      * Get Value If Exists
      *
      * @param key
-     * @return
+     * @return object
      */
     public Object getValue(String key) {
         Map<String, ?> data = sharedPreferences.getAll();
