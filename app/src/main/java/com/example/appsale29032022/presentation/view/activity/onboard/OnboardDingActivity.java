@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -19,6 +20,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.appsale29032022.R;
+import com.example.appsale29032022.common.AppConstant;
+import com.example.appsale29032022.data.local.AppCache;
+import com.example.appsale29032022.presentation.view.activity.sign_in.SignInActivity;
+import com.example.appsale29032022.presentation.view.activity.splash.SplashActivity;
 import com.example.appsale29032022.presentation.view.adapter.OnboardDingPagerAdapter;
 
 public class OnboardDingActivity extends AppCompatActivity {
@@ -33,8 +38,29 @@ public class OnboardDingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_onboarding);
 
         initial();
+        event();
         // Request Login Text
         setTextRequestLogin();
+    }
+
+    private void event() {
+        btnGetStarted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigateLoginScreen();
+            }
+        });
+    }
+
+    private void navigateLoginScreen() {
+        AppCache.getInstance(OnboardDingActivity.this)
+                .setValue(AppConstant.ONBOARD_DING_FIRST_TIME_DISPLAY_KEY, true)
+                .commit();
+
+        Intent intent = new Intent(this, SignInActivity.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(R.anim.alpha_fade_in, R.anim.alpha_fade_out);
     }
 
     private void initial() {
@@ -55,7 +81,7 @@ public class OnboardDingActivity extends AppCompatActivity {
         builder.setSpan(new ClickableSpan() {
             @Override
             public void onClick(@NonNull View view) {
-
+                navigateLoginScreen();
             }
 
             @Override
@@ -67,5 +93,4 @@ public class OnboardDingActivity extends AppCompatActivity {
         tvRequestLogin.setHighlightColor(Color.TRANSPARENT);
         tvRequestLogin.setMovementMethod(LinkMovementMethod.getInstance());
     }
-
 }

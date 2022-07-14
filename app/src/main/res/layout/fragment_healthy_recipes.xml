@@ -8,7 +8,7 @@
     tools:context=".presentation.view.fragment.onboard.HealthyRecipesFragment">
 
     <ImageView
-        android:src="@drawable/ic_img_onboard_ding_2"
+        android:src="@drawable/ic_img_onboard_ding_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

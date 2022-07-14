@@ -10,6 +10,7 @@ import com.example.appsale29032022.R;
 import com.example.appsale29032022.common.AppConstant;
 import com.example.appsale29032022.data.local.AppCache;
 import com.example.appsale29032022.presentation.view.activity.onboard.OnboardDingActivity;
+import com.example.appsale29032022.presentation.view.activity.sign_in.SignInActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -27,6 +28,8 @@ public class SplashActivity extends AppCompatActivity {
             Intent intent = null;
             if (isFirstTimeDisplay == null || !isFirstTimeDisplay) {
                 intent = new Intent(SplashActivity.this, OnboardDingActivity.class);
+            } else {
+                intent = new Intent(SplashActivity.this, SignInActivity.class);
             }
             startActivity(intent);
             finish();
