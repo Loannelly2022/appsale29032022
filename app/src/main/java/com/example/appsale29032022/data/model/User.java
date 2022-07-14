@@ -1,18 +1,24 @@
-package com.example.appsale29032022.data.remote.dto;
-
-import com.google.gson.annotations.SerializedName;
+package com.example.appsale29032022.data.model;
 
 /**
  * Created by pphat on 7/14/2022.
  */
-public class UserDTO {
-
+public class User {
     private String email;
     private String name;
     private String phone;
     private int userGroup;
     private String registerDate;
     private String token;
+
+    public User(String email, String name, String phone, int userGroup, String registerDate, String token) {
+        this.email = email;
+        this.name = name;
+        this.phone = phone;
+        this.userGroup = userGroup;
+        this.registerDate = registerDate;
+        this.token = token;
+    }
 
     public String getEmail() {
         return email;
@@ -64,7 +70,7 @@ public class UserDTO {
 
     @Override
     public String toString() {
-        return "UserDTO{" +
+        return "User{" +
                 "email='" + email + '\'' +
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
