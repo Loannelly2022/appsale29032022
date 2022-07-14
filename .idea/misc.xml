@@ -3,12 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AppSale29032022/app/src/main/res/drawable/background_button_border.xml" value="0.158" />
         <entry key="..\:/AppSale29032022/app/src/main/res/drawable/background_button_corner_primary.xml" value="0.156" />
+        <entry key="..\:/AppSale29032022/app/src/main/res/drawable/ic_email.xml" value="0.158" />
         <entry key="..\:/AppSale29032022/app/src/main/res/drawable/ic_img_onboard_ding_1.xml" value="0.136" />
         <entry key="..\:/AppSale29032022/app/src/main/res/drawable/ic_img_onboard_ding_2.xml" value="0.134" />
         <entry key="..\:/AppSale29032022/app/src/main/res/drawable/ic_img_onboard_ding_3.xml" value="0.158" />
         <entry key="..\:/AppSale29032022/app/src/main/res/drawable/ic_img_onboardding_1.xml" value="0.156" />
         <entry key="..\:/AppSale29032022/app/src/main/res/drawable/ic_logo.xml" value="0.177" />
+        <entry key="..\:/AppSale29032022/app/src/main/res/drawable/ic_password.xml" value="0.158" />
         <entry key="..\:/AppSale29032022/app/src/main/res/drawable/ic_text_logo.xml" value="0.156" />
         <entry key="..\:/AppSale29032022/app/src/main/res/layout/activity_onboarding.xml" value="0.264" />
         <entry key="..\:/AppSale29032022/app/src/main/res/layout/activity_sign_in.xml" value="0.2708333333333333" />
