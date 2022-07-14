@@ -23,6 +23,7 @@
         app:constraint_referenced_ids="imageViewBannerSignIn" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:textColorHint="@color/primary"
         android:id="@+id/textLayoutEmail"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="match_parent"
@@ -47,6 +48,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:textColorHint="@color/primary"
         android:id="@+id/textLayoutPassword"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="match_parent"
@@ -73,7 +75,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
-        android:background="@drawable/background_button_border"
+        android:background="@drawable/background_button_corner_primary"
         android:id="@+id/sign_in"
         android:layout_width="0dp"
         android:layout_height="50dp"
