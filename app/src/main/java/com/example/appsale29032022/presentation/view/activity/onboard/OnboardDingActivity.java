@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.appsale29032022.R;
 import com.example.appsale29032022.common.AppConstant;
+import com.example.appsale29032022.common.SpannedCommon;
 import com.example.appsale29032022.data.local.AppCache;
 import com.example.appsale29032022.presentation.view.activity.sign_in.SignInActivity;
 import com.example.appsale29032022.presentation.view.activity.splash.SplashActivity;
@@ -76,19 +77,7 @@ public class OnboardDingActivity extends AppCompatActivity {
     private void setTextRequestLogin() {
         SpannableStringBuilder builder = new SpannableStringBuilder();
         builder.append("Already Have An Account?");
-        int start = builder.length();
-        builder.append(" Log In");
-        builder.setSpan(new ClickableSpan() {
-            @Override
-            public void onClick(@NonNull View view) {
-                navigateLoginScreen();
-            }
-
-            @Override
-            public void updateDrawState(@NonNull TextPaint ds) {
-                ds.setColor(getResources().getColor(R.color.primary));
-            }
-        }, start, builder.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        builder.append(SpannedCommon.setClickColorLink(" Login", this, () -> navigateLoginScreen()));
         tvRequestLogin.setText(builder);
         tvRequestLogin.setHighlightColor(Color.TRANSPARENT);
         tvRequestLogin.setMovementMethod(LinkMovementMethod.getInstance());
