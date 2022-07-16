@@ -174,8 +174,7 @@
             android:textSize="15sp"
             android:textStyle="bold" />
     </LinearLayout>
-
-
+    
     <include
         android:id="@+id/layout_loading"
         layout="@layout/layout_loading"
