@@ -1,9 +1,14 @@
-package com.example.appsale29032022.data.model;
+package com.example.appsale29032022.data.remote.dto;
+
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Food {
-
+/**
+ * Created by pphat on 7/19/2022.
+ */
+public class FoodDTO {
+    @SerializedName("_id")
     private String id;
     private String name;
     private String address;
@@ -11,18 +16,6 @@ public class Food {
     private String img;
     private int quantity;
     private List<String> gallery;
-
-    public Food() { }
-
-    public Food(String id, String name, String address, int price, String img, int quantity, List<String> gallery) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.price = price;
-        this.img = img;
-        this.quantity = quantity;
-        this.gallery = gallery;
-    }
 
     public String getId() {
         return id;
@@ -82,7 +75,7 @@ public class Food {
 
     @Override
     public String toString() {
-        return "Food{" +
+        return "FoodDTO{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +

@@ -37,8 +37,4 @@ public class AuthenticationRepository {
         map.put("address", address);
         return apiService.signUp(map);
     }
-
-    public Call<AppResource<List<Food>>> fetchFoods() {
-        return apiService.fetchFoods();
-    }
 }

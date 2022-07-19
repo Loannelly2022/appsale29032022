@@ -13,4 +13,6 @@ public class AppConstant {
 
     public static final int TIME_MILLISECOND_DELAY = 2000;
     public static final String BASE_URL = "https://serverappsale.herokuapp.com/";
+
+    public static final String TOKEN_KEY = "token";
 }

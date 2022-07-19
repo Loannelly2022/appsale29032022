@@ -2,6 +2,7 @@ package com.example.appsale29032022.data.remote;
 
 import com.example.appsale29032022.data.model.Food;
 import com.example.appsale29032022.data.remote.dto.AppResource;
+import com.example.appsale29032022.data.remote.dto.FoodDTO;
 import com.example.appsale29032022.data.remote.dto.UserDTO;
 
 import java.util.HashMap;
@@ -24,5 +25,5 @@ public interface ApiService {
     Call<AppResource<UserDTO>> signUp(@Body HashMap<String, Object> body);
 
     @GET("product")
-    Call<AppResource<List<Food>>> fetchFoods();
+    Call<AppResource<List<FoodDTO>>> fetchFoods();
 }
