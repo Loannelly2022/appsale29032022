@@ -162,7 +162,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textLayoutPassword"
-        app:layout_constraintVertical_bias="0.75"
+        app:layout_constraintVertical_bias="0.6"
         android:gravity="center">
 
         <TextView
@@ -174,6 +174,17 @@
             android:textSize="15sp"
             android:textStyle="bold" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_view_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sign_up"
+        app:layout_constraintVertical_bias="0.824"
+        tools:text="Already have an account? Login" />
     
     <include
         android:id="@+id/layout_loading"

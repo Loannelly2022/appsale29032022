@@ -97,15 +97,16 @@
             android:textSize="15sp"
             android:textStyle="bold" />
     </LinearLayout>
+
     <TextView
+        android:id="@+id/text_view_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sign_in"
-        app:layout_constraintVertical_bias="0.85"
-        android:id="@+id/text_view_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        app:layout_constraintVertical_bias="0.824"
         tools:text="Don't have an account?Register" />
 
     <include
