@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppSale29032022">
         <activity
+            android:name=".presentation.view.activity.home.HomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.view.activity.sign_up.SignUpActivity"
             android:exported="false" />
         <activity
@@ -29,6 +32,10 @@
         <activity
             android:name=".presentation.view.activity.sign_in.SignInActivity"
             android:exported="false" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

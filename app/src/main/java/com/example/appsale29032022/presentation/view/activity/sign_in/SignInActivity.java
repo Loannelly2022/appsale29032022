@@ -21,6 +21,7 @@ import com.example.appsale29032022.common.SpannedCommon;
 import com.example.appsale29032022.common.StringCommon;
 import com.example.appsale29032022.data.model.User;
 import com.example.appsale29032022.data.remote.dto.AppResource;
+import com.example.appsale29032022.presentation.view.activity.home.HomeActivity;
 import com.example.appsale29032022.presentation.view.activity.sign_up.SignUpActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -48,6 +49,9 @@ public class SignInActivity extends AppCompatActivity {
                     case SUCCESS:
                         Toast.makeText(SignInActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                         layoutLoading.setVisibility(View.GONE);
+                        Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        finish();
                         break;
                     case LOADING:
                         layoutLoading.setVisibility(View.VISIBLE);
