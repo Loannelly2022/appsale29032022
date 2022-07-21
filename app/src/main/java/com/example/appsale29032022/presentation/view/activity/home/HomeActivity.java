@@ -1,107 +1,170 @@
 package com.example.appsale29032022.presentation.view.activity.home;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.appsale29032022.R;
-import com.example.appsale29032022.presentation.view.activity.store.StoreFragment;
-import com.example.appsale29032022.presentation.view.activity.user.UserFragment;
+import com.example.appsale29032022.data.model.Food;
+import com.example.appsale29032022.data.model.Order;
+import com.example.appsale29032022.data.remote.dto.AppResource;
+import com.example.appsale29032022.presentation.adapter.FoodAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
-    private final int ID_HOME = 1;
-    private final int ID_STORE = 2;
-    private final int ID_ABOUT = 3;
-    TextView txtLable;
-    MeowBottomNavigation naviBottom;
+    HomeViewModel viewModel;
+    RecyclerView rcvFood;
+    LinearLayout layoutLoading;
+    FoodAdapter foodAdapter;
+    TextView tvCountCart;
+    Toolbar toolBar;
+    Order order;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
         addControls();
-        setUpNavi();
+        observerData();
         events();
-
     }
 
+    private void observerData() {
+        viewModel.getFoods().observe(this, new Observer<AppResource<List<Food>>>() {
+            @Override
+            public void onChanged(AppResource<List<Food>> foodAppResource) {
+                switch (foodAppResource.status) {
+                    case LOADING:
+                        layoutLoading.setVisibility(View.VISIBLE);
+                        break;
+                    case SUCCESS:
+                        layoutLoading.setVisibility(View.GONE);
+                        foodAdapter.updateListProduct(foodAppResource.data);
+                        break;
+                    case ERROR:
+                        Toast.makeText(HomeActivity.this, foodAppResource.message, Toast.LENGTH_SHORT).show();
+                        layoutLoading.setVisibility(View.GONE);
+                        break;
+                }
+            }
+        });
+        viewModel.getOrder().observe(this, new Observer<AppResource<Order>>() {
+            @Override
+            public void onChanged(AppResource<Order> orderAppResource) {
+                switch (orderAppResource.status) {
+                    case LOADING:
+                        layoutLoading.setVisibility(View.VISIBLE);
+                        break;
+                    case SUCCESS:
+                        layoutLoading.setVisibility(View.GONE);
+                        order = orderAppResource.data;
+                        int quantities = getQuantity(order == null ? null : order.getFoods());
+                        setupBadge(quantities);
+                        break;
+                    case ERROR:
+                        Toast.makeText(HomeActivity.this, orderAppResource.message, Toast.LENGTH_SHORT).show();
+                        layoutLoading.setVisibility(View.GONE);
+                        break;
+                }
+            }
+        });
+        viewModel.fetchFoods();
+        foodAdapter.setOnItemClickFood(new FoodAdapter.OnItemClickFood() {
+            @Override
+            public void onClick(int position) {
+                viewModel.fetchOrder(foodAdapter.getListFoods().get(position).getId());
+            }
+        });
+    }
     private void events() {
-        naviBottom.setOnReselectListener(new MeowBottomNavigation.ReselectListener() {
-            @Override
-            public void onReselectItem(MeowBottomNavigation.Model item) {
-                switch (item.getId()){
-                    case ID_HOME:
-                        replaceFragment(new HomeFragment());
-                        break;
-                    case ID_STORE:
-                        replaceFragment(new StoreFragment());
-                        break;
-                    case ID_ABOUT:
-                        replaceFragment(new UserFragment());
-                        break;
-                }
-            }
-        });
-        naviBottom.setOnShowListener(new MeowBottomNavigation.ShowListener() {
-            @Override
-            public void onShowItem(MeowBottomNavigation.Model item) {
-                String name = "";
-                switch (item.getId()){
-                    case ID_HOME:
-                        name = "Home";
-                        break;
-                    case ID_STORE:
-                        name = "Store";
-                        break;
-                    case ID_ABOUT:
-                        name = "About";
-                        break;
-                }
-                txtLable.setText(name);
-            }
-        });
-        naviBottom.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
-            @Override
-            public void onClickItem(MeowBottomNavigation.Model item) {
-                switch (item.getId()){
-                    case ID_HOME:
-                        replaceFragment(new HomeFragment());
-                        break;
-                    case ID_STORE:
-                        replaceFragment(new StoreFragment());
-                        break;
-                    case ID_ABOUT:
-                        replaceFragment(new UserFragment());
-                        break;
-                }
-            }
-        });
-
-        // Choose fragment first show
-        naviBottom.show(ID_HOME,true);
-        replaceFragment(new HomeFragment());
-    }
-
-    private void setUpNavi() {
-        naviBottom.add(new MeowBottomNavigation.Model(ID_HOME,R.drawable.ic_home));
-        naviBottom.add(new MeowBottomNavigation.Model(ID_STORE,R.drawable.ic_store));
-        naviBottom.add(new MeowBottomNavigation.Model(ID_ABOUT,R.drawable.ic_acc));
+        viewModel.fetchFoods();
     }
 
     private void addControls() {
-        txtLable = findViewById(R.id.textViewLabel);
-        naviBottom = findViewById(R.id.navigationBottom);
+        layoutLoading = findViewById(R.id.layout_loading);
+
+        toolBar = findViewById(R.id.toolbar_home);
+        toolBar.setTitle("Food");
+        toolBar.setTitleTextColor(getResources().getColor(R.color.primary));
+
+        viewModel = new ViewModelProvider(this, new ViewModelProvider.Factory() {
+            @NonNull
+            @Override
+            public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+                return (T) new HomeViewModel();
+            }
+        }).get(HomeViewModel.class);
+        foodAdapter = new FoodAdapter();
+
+        // Setup RecyclerView
+        rcvFood = findViewById(R.id.recycler_view_food);
+        rcvFood.setAdapter(foodAdapter);
+        rcvFood.setHasFixedSize(true);
     }
 
-    private void replaceFragment(Fragment fragment){
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frameLayout,fragment);
-        fragmentTransaction.commit();
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        final MenuItem menuItem = menu.findItem(R.id.action_cart);
+        View actionView = menuItem.getActionView();
+        tvCountCart = actionView.findViewById(R.id.text_cart_badge);
+
+        int quantities = getQuantity(order == null ? null : order.getFoods());
+        setupBadge(quantities);
+
+        actionView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onOptionsItemSelected(menuItem);
+            }
+        });
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_cart:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private int getQuantity(List<Food> listFoods) {
+        if (listFoods == null) {
+            return 0;
+        }
+        int totalQuantities = 0;
+        for (Food food: listFoods) {
+            totalQuantities += food.getQuantity();
+        }
+        return totalQuantities;
+    }
+
+    private void setupBadge(int quantities) {
+        if (quantities == 0) {
+            tvCountCart.setVisibility(View.GONE);
+        } else {
+            tvCountCart.setVisibility(View.VISIBLE);
+            tvCountCart.setText(String.valueOf(Math.min(quantities, 99)));
+            Log.d("TAG", "setupBadge: " + tvCountCart.getText());
+        }
     }
 }
