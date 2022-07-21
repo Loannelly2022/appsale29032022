@@ -57,6 +57,7 @@ public class SignInActivity extends AppCompatActivity {
                         Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
                         startActivity(intent);
                         finish();
+                        overridePendingTransition(R.anim.alpha_fade_in, R.anim.alpha_fade_out);
                         break;
                     case LOADING:
                         layoutLoading.setVisibility(View.VISIBLE);

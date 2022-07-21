@@ -1,11 +1,5 @@
 package com.example.appsale29032022.presentation.view.activity.sign_up;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,21 +9,23 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 import com.example.appsale29032022.R;
 import com.example.appsale29032022.common.SpannedCommon;
 import com.example.appsale29032022.common.StringCommon;
 import com.example.appsale29032022.data.model.User;
 import com.example.appsale29032022.data.remote.dto.AppResource;
 import com.example.appsale29032022.presentation.view.activity.sign_in.SignInActivity;
-import com.example.appsale29032022.presentation.view.activity.sign_in.SignInViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class SignUpActivity extends AppCompatActivity {
 
     TextInputEditText inputName, inputEmail, inputPassword, inputPhone, inputAddress;
-    LinearLayout btnsignUp;
-    LinearLayout layoutLoading;
+    LinearLayout btnSignUp, layoutLoading;
     SignUpViewModel signUpViewModel;
     TextView tvRegister;
 
@@ -39,23 +35,21 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         initial();
+        setTextRegister();
         observerData();
         event();
     }
 
     private void event() {
-        btnsignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email = inputEmail.getText().toString();
-                String password = inputPassword.getText().toString();
-                String name = inputName.getText().toString();
-                String phone = inputPhone.getText().toString();
-                String address = inputAddress.getText().toString();
+        btnSignUp.setOnClickListener(view -> {
+            String email = inputEmail.getText().toString();
+            String password = inputPassword.getText().toString();
+            String name = inputName.getText().toString();
+            String phone = inputPhone.getText().toString();
+            String address = inputAddress.getText().toString();
 
-                if (StringCommon.isValidEmail(email) && !password.isEmpty() && !name.isEmpty() && !address.isEmpty() && phone.matches("[+-]?\\d*(\\.\\d+)?")) {
-                    signUpViewModel.signUp(email, password,name,phone,address);
-                }
+            if (StringCommon.isValidEmail(email) && !password.isEmpty() && !name.isEmpty() && !address.isEmpty() && phone.matches("[+-]?\\d*(\\.\\d+)?")) {
+                signUpViewModel.signUp(email, password,name,phone,address);
             }
         });
     }
@@ -66,11 +60,12 @@ public class SignUpActivity extends AppCompatActivity {
             public void onChanged(AppResource<User> userAppResource) {
                 switch (userAppResource.status) {
                     case SUCCESS:
-                        Toast.makeText(SignUpActivity.this, "Đăng ky thành công", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                         layoutLoading.setVisibility(View.GONE);
                         Intent intent = new Intent(SignUpActivity.this,SignInActivity.class);
                         startActivity(intent);
                         finish();
+                        overridePendingTransition(R.anim.alpha_fade_in, R.anim.alpha_fade_out);
                         break;
                     case LOADING:
                         layoutLoading.setVisibility(View.VISIBLE);
@@ -90,7 +85,7 @@ public class SignUpActivity extends AppCompatActivity {
         inputPassword = findViewById(R.id.textEditPassword);
         inputPhone = findViewById(R.id.textEditPhone);
         inputAddress = findViewById(R.id.textEditLocation);
-        btnsignUp = findViewById(R.id.sign_up);
+        btnSignUp = findViewById(R.id.sign_up);
         layoutLoading = findViewById(R.id.layout_loading);
         tvRegister = findViewById(R.id.text_view_login);
 
@@ -107,7 +102,7 @@ public class SignUpActivity extends AppCompatActivity {
         SpannableStringBuilder builder = new SpannableStringBuilder();
         builder.append("Already have an account? ");
         builder.append(SpannedCommon.setClickColorLink("Login", this, () -> {
-            startActivity(new Intent(SignUpActivity.this, SignUpActivity.class));
+            finish();
             overridePendingTransition(R.anim.alpha_fade_in, R.anim.alpha_fade_out);
         }));
         tvRegister.setText(builder);

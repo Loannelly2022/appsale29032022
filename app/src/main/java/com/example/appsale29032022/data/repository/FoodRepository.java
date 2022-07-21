@@ -11,7 +11,11 @@ import java.util.List;
 import retrofit2.Call;
 
 /**
+<<<<<<< HEAD
  * Created by Ogata on 7/21/2022.
+=======
+ * Created by pphat on 7/19/2022.
+>>>>>>> master
  */
 public class FoodRepository {
     private ApiService apiService;
@@ -20,9 +24,15 @@ public class FoodRepository {
         apiService = RetrofitClient.getInstance().getApiService();
     }
 
+<<<<<<< HEAD
 
     public Call<AppResource<List<FoodDTO>>> fetchFoods() {
         return apiService.fetchFoods();
     }
 
+=======
+    public Call<AppResource<List<FoodDTO>>> fetchFoods() {
+        return apiService.fetchFoods();
+    }
+>>>>>>> master
 }

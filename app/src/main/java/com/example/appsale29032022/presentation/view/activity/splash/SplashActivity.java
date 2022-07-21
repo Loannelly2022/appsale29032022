@@ -26,7 +26,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(() -> {
             Boolean isFirstTimeDisplay = (Boolean) AppCache.getInstance(SplashActivity.this)
                     .getValue(AppConstant.ONBOARD_DING_FIRST_TIME_DISPLAY_KEY);
-            Intent intent = null;
+            Intent intent;
             if (isFirstTimeDisplay == null || !isFirstTimeDisplay) {
                 intent = new Intent(SplashActivity.this, OnboardDingActivity.class);
             } else {

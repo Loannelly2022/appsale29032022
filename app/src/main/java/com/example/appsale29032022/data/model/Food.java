@@ -1,7 +1,5 @@
 package com.example.appsale29032022.data.model;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
 public class Food {
@@ -14,8 +12,12 @@ public class Food {
     private int quantity;
     private List<String> gallery;
 
+<<<<<<< HEAD
     public Food(){
     }
+=======
+    public Food() { }
+>>>>>>> master
 
     public Food(String id, String name, String address, int price, String img, int quantity, List<String> gallery) {
         this.id = id;

@@ -1,5 +1,6 @@
 package com.example.appsale29032022.presentation.view.activity.home;
 
+<<<<<<< HEAD
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -35,6 +36,28 @@ public class HomeActivity extends AppCompatActivity {
     TextView tvCountCart;
     Toolbar toolBar;
     Order order;
+=======
+import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.Toast;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
+import com.example.appsale29032022.R;
+import com.example.appsale29032022.presentation.adapter.FoodAdapter;
+
+public class HomeActivity extends AppCompatActivity {
+
+    HomeViewModel homeViewModel;
+    RecyclerView rcvFood;
+    LinearLayout layoutLoading;
+    FoodAdapter foodAdapter;
+    Toolbar toolBar;
+>>>>>>> master
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +69,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void observerData() {
+<<<<<<< HEAD
         viewModel.getFoods().observe(this, new Observer<AppResource<List<Food>>>() {
             @Override
             public void onChanged(AppResource<List<Food>> foodAppResource) {
@@ -89,15 +113,35 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(int position) {
                 viewModel.fetchOrder(foodAdapter.getListFoods().get(position).getId());
+=======
+        homeViewModel.getFoods().observe(this, foodAppResource -> {
+            switch (foodAppResource.status) {
+                case LOADING:
+                    layoutLoading.setVisibility(View.VISIBLE);
+                    break;
+                case SUCCESS:
+                    layoutLoading.setVisibility(View.GONE);
+                    foodAdapter.updateListProduct(foodAppResource.data);
+                    break;
+                case ERROR:
+                    Toast.makeText(HomeActivity.this, foodAppResource.message, Toast.LENGTH_SHORT).show();
+                    layoutLoading.setVisibility(View.GONE);
+                    break;
+>>>>>>> master
             }
         });
     }
     private void events() {
+<<<<<<< HEAD
         viewModel.fetchFoods();
+=======
+        homeViewModel.fetchFoods();
+>>>>>>> master
     }
 
     private void addControls() {
         layoutLoading = findViewById(R.id.layout_loading);
+<<<<<<< HEAD
 
         toolBar = findViewById(R.id.toolbar_home);
         toolBar.setTitle("Food");
@@ -166,5 +210,25 @@ public class HomeActivity extends AppCompatActivity {
             tvCountCart.setText(String.valueOf(Math.min(quantities, 99)));
             Log.d("TAG", "setupBadge: " + tvCountCart.getText());
         }
+=======
+
+        toolBar = findViewById(R.id.toolbar_home);
+        toolBar.setTitle("Food");
+        toolBar.setTitleTextColor(getResources().getColor(R.color.primary));
+
+        homeViewModel = new ViewModelProvider(this, new ViewModelProvider.Factory() {
+            @NonNull
+            @Override
+            public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+                return (T) new HomeViewModel();
+            }
+        }).get(HomeViewModel.class);
+        foodAdapter = new FoodAdapter();
+
+        // Setup RecyclerView
+        rcvFood = findViewById(R.id.recycler_view_food);
+        rcvFood.setAdapter(foodAdapter);
+        rcvFood.setHasFixedSize(true);
+>>>>>>> master
     }
 }

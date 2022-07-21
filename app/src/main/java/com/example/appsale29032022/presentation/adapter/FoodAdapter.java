@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.appsale29032022.R;
 import com.example.appsale29032022.common.AppConstant;
+import com.example.appsale29032022.common.StringCommon;
 import com.example.appsale29032022.data.model.Food;
 
 
@@ -66,7 +68,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
         TextView tvName, tvAddress, tvPrice;
         ImageView img;
-        AppCompatButton btnAddToCart;
+        LinearLayout btnAddCart;
 
         public FoodViewHolder(@NonNull View view) {
             super(view);
@@ -74,9 +76,9 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             tvAddress = view.findViewById(R.id.textViewAddress);
             tvPrice = view.findViewById(R.id.textViewPrice);
             img = view.findViewById(R.id.imageView);
-            btnAddToCart = view.findViewById(R.id.buttonAddCart);
+            btnAddCart = view.findViewById(R.id.button_add);
 
-            btnAddToCart.setOnClickListener(new View.OnClickListener() {
+            btnAddCart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (onItemClickFood != null) {
@@ -89,7 +91,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         public void bind(Context context, Food food) {
             tvName.setText(food.getName());
             tvAddress.setText(food.getAddress());
-            tvPrice.setText(new DecimalFormat("#,###").format(food.getPrice()) + " VND");
+            tvPrice.setText(String.format("%s VND", StringCommon.formatCurrency(food.getPrice())));
             Glide.with(context)
                     .load(AppConstant.BASE_URL  + food.getImg())
                     .placeholder(R.drawable.img_logo)
@@ -104,5 +106,4 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
     public interface OnItemClickFood {
         void onClick(int position);
     }
-
 }
