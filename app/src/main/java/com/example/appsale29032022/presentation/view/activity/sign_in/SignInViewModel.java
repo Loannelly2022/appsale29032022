@@ -1,5 +1,6 @@
 package com.example.appsale29032022.presentation.view.activity.sign_in;
 
+import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -27,8 +28,8 @@ public class SignInViewModel extends ViewModel {
     private final AuthenticationRepository authenticationRepository;
     private MutableLiveData<AppResource<User>> resourceUser;
 
-    public SignInViewModel() {
-        authenticationRepository = new AuthenticationRepository();
+    public SignInViewModel(Context context) {
+        authenticationRepository = new AuthenticationRepository(context);
         if (resourceUser == null) {
             resourceUser = new MutableLiveData<>();
         }

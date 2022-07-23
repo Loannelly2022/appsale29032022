@@ -1,5 +1,7 @@
 package com.example.appsale29032022.presentation.view.activity.sign_up;
 
+import android.content.Context;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -21,8 +23,8 @@ public class SignUpViewModel extends ViewModel {
     private final AuthenticationRepository authenticationRepository;
     private MutableLiveData<AppResource<User>> resourceUser;
 
-    public SignUpViewModel() {
-        authenticationRepository = new AuthenticationRepository();
+    public SignUpViewModel(Context context) {
+        authenticationRepository = new AuthenticationRepository(context);
         if (resourceUser == null) {
             resourceUser = new MutableLiveData<>();
         }

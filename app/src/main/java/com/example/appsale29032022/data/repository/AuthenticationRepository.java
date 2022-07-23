@@ -1,5 +1,7 @@
 package com.example.appsale29032022.data.repository;
 
+import android.content.Context;
+
 import com.example.appsale29032022.data.model.Food;
 import com.example.appsale29032022.data.remote.ApiService;
 import com.example.appsale29032022.data.remote.RetrofitClient;
@@ -17,8 +19,8 @@ import retrofit2.Call;
 public class AuthenticationRepository {
     private ApiService apiService;
 
-    public AuthenticationRepository() {
-        apiService = RetrofitClient.getInstance().getApiService();
+    public AuthenticationRepository(Context context) {
+        apiService = RetrofitClient.getInstance(context).getApiService();
     }
 
     public Call<AppResource<UserDTO>> signIn(String email, String password) {
