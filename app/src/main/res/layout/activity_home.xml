@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<<<<<<< HEAD
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-=======
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
->>>>>>> master
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
-    android:orientation="vertical"
-=======
     android:background="@color/white"
->>>>>>> master
     tools:context=".presentation.view.activity.home.HomeActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -21,14 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-<<<<<<< HEAD
-        android:titleTextColor="@color/primary" />
-=======
         android:titleTextColor="@color/primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
->>>>>>> master
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_below="@id/toolbar_home"
@@ -42,8 +30,4 @@
         android:id="@+id/layout_loading"
         layout="@layout/layout_loading"
         android:visibility="gone" />
-<<<<<<< HEAD
-</LinearLayout>
-=======
 </RelativeLayout>
->>>>>>> master

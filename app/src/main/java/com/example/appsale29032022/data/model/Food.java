@@ -12,12 +12,7 @@ public class Food {
     private int quantity;
     private List<String> gallery;
 
-<<<<<<< HEAD
-    public Food(){
-    }
-=======
     public Food() { }
->>>>>>> master
 
     public Food(String id, String name, String address, int price, String img, int quantity, List<String> gallery) {
         this.id = id;

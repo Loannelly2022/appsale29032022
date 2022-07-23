@@ -4,15 +4,10 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-<<<<<<< HEAD
-public class FoodDTO {
-
-=======
 /**
  * Created by pphat on 7/19/2022.
  */
 public class FoodDTO {
->>>>>>> master
     @SerializedName("_id")
     private String id;
     private String name;
@@ -80,11 +75,7 @@ public class FoodDTO {
 
     @Override
     public String toString() {
-<<<<<<< HEAD
-        return "Food{" +
-=======
         return "FoodDTO{" +
->>>>>>> master
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +

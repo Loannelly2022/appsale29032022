@@ -1,61 +1,40 @@
 package com.example.appsale29032022.presentation.view.activity.home;
 
-<<<<<<< HEAD
 import android.content.Context;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 
-import androidx.annotation.NonNull;
-=======
->>>>>>> master
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.appsale29032022.R;
 import com.example.appsale29032022.data.model.Food;
 import com.example.appsale29032022.data.model.Order;
-import com.example.appsale29032022.data.model.User;
 import com.example.appsale29032022.data.remote.dto.AppResource;
 import com.example.appsale29032022.data.remote.dto.FoodDTO;
-<<<<<<< HEAD
 import com.example.appsale29032022.data.remote.dto.OrderDTO;
-import com.example.appsale29032022.data.remote.dto.UserDTO;
-import com.example.appsale29032022.data.repository.AuthenticationRepository;
 import com.example.appsale29032022.data.repository.FoodRepository;
 import com.example.appsale29032022.data.repository.OrderRepository;
-=======
-import com.example.appsale29032022.data.repository.FoodRepository;
->>>>>>> master
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HomeViewModel extends ViewModel {
     private final FoodRepository foodRepository;
-<<<<<<< HEAD
     private final OrderRepository oderRepository;
     private MutableLiveData<AppResource<List<Food>>> resourceFood;
     private MutableLiveData<AppResource<Order>> orderData = new MutableLiveData<>();
-=======
-    private MutableLiveData<AppResource<List<Food>>> resourceFood;
->>>>>>> master
 
-    public HomeViewModel() {
-        foodRepository = new FoodRepository();
+    public HomeViewModel(Context context) {
+        foodRepository = new FoodRepository(context);
+        oderRepository = new OrderRepository(context);
         if (resourceFood == null) {
             resourceFood = new MutableLiveData<>();
         }
-        oderRepository = new OrderRepository();
         if (orderData == null) {
             orderData = new MutableLiveData<>();
         }

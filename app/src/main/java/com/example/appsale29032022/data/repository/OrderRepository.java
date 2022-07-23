@@ -14,8 +14,8 @@ import retrofit2.Call;
 public class OrderRepository {
     private ApiService apiService;
 
-    public OrderRepository() {
-        apiService = RetrofitClient.getInstance().getApiService();
+    public OrderRepository(Context context) {
+        apiService = RetrofitClient.getInstance(context).getApiService();
     }
 
     public Call<AppResource<OrderDTO>> addToCart(String idFood) {

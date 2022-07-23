@@ -99,7 +99,7 @@ public class SignInActivity extends AppCompatActivity {
             @NonNull
             @Override
             public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-                return (T) new SignInViewModel();
+                return (T) new SignInViewModel(SignInActivity.this);
             }
         }).get(SignInViewModel.class);
     }
