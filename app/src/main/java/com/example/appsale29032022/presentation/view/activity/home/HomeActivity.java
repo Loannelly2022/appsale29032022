@@ -19,11 +19,9 @@ import com.example.appsale29032022.data.model.Food;
 import com.example.appsale29032022.data.model.Order;
 import com.example.appsale29032022.data.remote.dto.AppResource;
 import com.example.appsale29032022.presentation.adapter.FoodAdapter;
-
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
-
     HomeViewModel homeViewModel;
     RecyclerView rcvFood;
     LinearLayout layoutLoading;
@@ -34,12 +32,10 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
         addControls();
         observerData();
         events();
     }
-
     private void observerData() {
         homeViewModel.getFoods().observe(this, new Observer<AppResource<List<Food>>>() {
             @Override
@@ -75,20 +71,17 @@ public class HomeActivity extends AppCompatActivity {
                     break;
             }
         });
-
     }
     private void events() {
         homeViewModel.fetchFoods();
         foodAdapter.setOnItemClickFood(position -> homeViewModel.fetchOrder(foodAdapter.getListFoods().get(position).getId()));
     }
-
     private void addControls() {
         layoutLoading = findViewById(R.id.layout_loading);
         toolBar = findViewById(R.id.toolbar_home);
         toolBar.setTitle("Food");
         toolBar.setTitleTextColor(getResources().getColor(R.color.primary, null));
         setSupportActionBar(toolBar);
-
         homeViewModel = new ViewModelProvider(this, new ViewModelProvider.Factory() {
             @NonNull
             @Override
@@ -103,8 +96,6 @@ public class HomeActivity extends AppCompatActivity {
         rcvFood.setAdapter(foodAdapter);
         rcvFood.setHasFixedSize(true);
     }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_home, menu);
@@ -115,7 +106,6 @@ public class HomeActivity extends AppCompatActivity {
         actionView.setOnClickListener(v -> onOptionsItemSelected(menuItem));
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -124,7 +114,6 @@ public class HomeActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
     private int getQuantity(List<Food> listFoods) {
         if (listFoods == null || listFoods.size() == 0) {
             return 0;
@@ -135,7 +124,6 @@ public class HomeActivity extends AppCompatActivity {
         }
         return totalQuantities;
     }
-
     private void setupBadge(int quantities) {
         if (quantities == 0) {
             tvCountCart.setVisibility(View.GONE);

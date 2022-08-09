@@ -1,20 +1,23 @@
 package com.example.appsale29032022.presentation.view.activity.sign_in;
 
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.text.SpannableStringBuilder;
-import android.text.method.LinkMovementMethod;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
+
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.appsale29032022.R;
 import com.example.appsale29032022.common.AppConstant;
@@ -28,16 +31,15 @@ import com.example.appsale29032022.presentation.view.activity.sign_up.SignUpActi
 import com.google.android.material.textfield.TextInputEditText;
 
 public class SignInActivity extends AppCompatActivity {
-
     SignInViewModel viewModel;
     LinearLayout layoutLoading, btnSignIn;
     TextInputEditText txtInputEditEmail, txtInputEditPassword;
     TextView tvRegister;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-
         initial();
         observerData();
         event();
@@ -83,11 +85,9 @@ public class SignInActivity extends AppCompatActivity {
                 }
             }
         });
-
         // Set Click Register
         setTextRegister();
     }
-
     private void initial() {
         layoutLoading = findViewById(R.id.layout_loading);
         txtInputEditEmail = findViewById(R.id.textEditEmail);
@@ -103,14 +103,15 @@ public class SignInActivity extends AppCompatActivity {
             }
         }).get(SignInViewModel.class);
     }
-
     private void setTextRegister() {
         SpannableStringBuilder builder = new SpannableStringBuilder();
         builder.append("Don't have an account?");
+
         builder.append(SpannedCommon.setClickColorLink("Register", this, () -> {
             startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
             overridePendingTransition(R.anim.alpha_fade_in, R.anim.alpha_fade_out);
         }));
+
         tvRegister.setText(builder);
         tvRegister.setHighlightColor(Color.TRANSPARENT);
         tvRegister.setMovementMethod(LinkMovementMethod.getInstance());

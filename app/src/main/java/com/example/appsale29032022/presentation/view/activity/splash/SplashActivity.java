@@ -19,27 +19,27 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
         navigateToDestination();
     }
-
-    private void navigateToDestination() {
-        new Handler().postDelayed(() -> {
-            Boolean isFirstTimeDisplay = (Boolean) AppCache.getInstance(SplashActivity.this)
-                    .getValue(AppConstant.ONBOARD_DING_FIRST_TIME_DISPLAY_KEY);
-            Intent intent;
-            if (isFirstTimeDisplay == null || !isFirstTimeDisplay) {
-                intent = new Intent(SplashActivity.this, OnboardDingActivity.class);
-            } else {
-                String token = (String) AppCache.getInstance(SplashActivity.this).getValue(AppConstant.TOKEN_KEY);
-                if (token != null && !token.isEmpty()) {
-                    intent = new Intent(SplashActivity.this, HomeActivity.class);
-                } else {
-                    intent = new Intent(SplashActivity.this, SignInActivity.class);
-                }
-            }
-            startActivity(intent);
-            finish();
-            overridePendingTransition(R.anim.alpha_fade_in, R.anim.alpha_fade_out);
-        }, AppConstant.TIME_MILLISECOND_DELAY);
+    private void navigateToDestination(){
+       new Handler().postDelayed(() -> {
+           Boolean isFirstimeDisplay = (Boolean) AppCache.getInstance(SplashActivity.this)
+                       .getValue(AppConstant.ONBOARD_DING_FIRST_TIME_DISPLAY_KEY);
+               Intent intent = null;
+               if(isFirstimeDisplay == null || !isFirstimeDisplay) {
+                   intent = new Intent(SplashActivity.this, OnboardDingActivity.class);
+               } else {
+                   String token = (String) AppCache.getInstance(SplashActivity.this).getValue(AppConstant.TOKEN_KEY);
+                   if (token != null && !token.isEmpty()) {
+                       intent = new Intent(SplashActivity.this, HomeActivity.class);
+                   } else {
+                       intent = new Intent(SplashActivity.this, SignInActivity.class);
+                   }
+               }
+               startActivity(intent);
+               finish();
+               overridePendingTransition(R.anim.alpha_fade_in, R.anim.alpha_fade_out);
+       },AppConstant.TIME_MILLISECOND_DELAY);
     }
 }

@@ -4,16 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".presentation.view.activity.home.HomeActivity">
+    android:background="@color/white">
 
     <androidx.appcompat.widget.Toolbar
-        app:contentInsetEnd="10dp"
         android:id="@+id/toolbar_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:titleTextColor="@color/primary"
+        app:contentInsetEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,7 +24,6 @@
         android:id="@+id/recycler_view_food"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
     <include
         android:id="@+id/layout_loading"
         layout="@layout/layout_loading"

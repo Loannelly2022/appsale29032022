@@ -16,9 +16,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Created by Ogata on 7/19/2022.
- */
 public class SignUpViewModel extends ViewModel {
     private final AuthenticationRepository authenticationRepository;
     private MutableLiveData<AppResource<User>> resourceUser;
@@ -29,11 +26,9 @@ public class SignUpViewModel extends ViewModel {
             resourceUser = new MutableLiveData<>();
         }
     }
-
     public LiveData<AppResource<User>> getResourceUser() {
         return resourceUser;
     }
-
     public void signUp(String email, String password, String name, String phone, String address) {
         resourceUser.setValue(new AppResource.Loading(null));
         authenticationRepository
@@ -68,7 +63,6 @@ public class SignUpViewModel extends ViewModel {
                             }
                         }
                     }
-
                     @Override
                     public void onFailure(Call<AppResource<UserDTO>> call, Throwable t) {
                         resourceUser.setValue(new AppResource.Error(t.getMessage()));

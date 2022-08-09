@@ -28,18 +28,15 @@ public class SignUpActivity extends AppCompatActivity {
     LinearLayout btnSignUp, layoutLoading;
     SignUpViewModel signUpViewModel;
     TextView tvRegister;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
         initial();
         setTextRegister();
         observerData();
         event();
     }
-
     private void event() {
         btnSignUp.setOnClickListener(view -> {
             String email = inputEmail.getText().toString();
@@ -53,7 +50,6 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
-
     private void observerData() {
         signUpViewModel.getResourceUser().observe(this, new Observer<AppResource<User>>() {
             @Override

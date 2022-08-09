@@ -4,18 +4,18 @@
     <item>
         <shape>
             <corners android:radius="20dp"/>
-            <solid android:color="@color/primary"/>
+            <solid android:color="@color/primary2"/>
         </shape>
     </item>
 
-    <item>
-        <selector>
-            <item android:state_pressed="true">
-                <shape>
-                    <corners android:radius="20dp"/>
-                    <solid android:color="@color/primary_2"/>
-                </shape>
-            </item>
-        </selector>
-    </item>
+<item>
+    <selector>
+        <item android:state_pressed="true">
+            <shape>
+                <corners android:radius="20dp"/>
+                <solid android:color="@color/primary2"/>
+            </shape>
+        </item>
+    </selector>
+</item>
 </layer-list>

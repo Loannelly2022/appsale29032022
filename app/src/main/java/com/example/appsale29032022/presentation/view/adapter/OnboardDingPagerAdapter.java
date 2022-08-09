@@ -8,10 +8,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import com.example.appsale29032022.presentation.view.fragment.onboard.EatHealthyFragment;
 import com.example.appsale29032022.presentation.view.fragment.onboard.HealthyRecipesFragment;
 
-/**
- * Created by pphat on 7/12/2022.
- */
-public class OnboardDingPagerAdapter extends FragmentStateAdapter {
+public class OnboardDingPagerAdapter extends FragmentStateAdapter{
     private Fragment eatHealthyFragment, healthyRecipesFragment;
     public OnboardDingPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
@@ -22,20 +19,22 @@ public class OnboardDingPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                if (eatHealthyFragment == null) {
-                    eatHealthyFragment = new EatHealthyFragment();
+                if (eatHealthyFragment==null){
+                    eatHealthyFragment=new EatHealthyFragment();
                 }
                 return eatHealthyFragment;
             default:
-                if (healthyRecipesFragment == null) {
-                    healthyRecipesFragment = new HealthyRecipesFragment();
+                if(healthyRecipesFragment==null){
+                    healthyRecipesFragment=new HealthyRecipesFragment();
                 }
                 return healthyRecipesFragment;
         }
-    }
 
+    }
     @Override
     public int getItemCount() {
         return 2;
     }
 }
+
+

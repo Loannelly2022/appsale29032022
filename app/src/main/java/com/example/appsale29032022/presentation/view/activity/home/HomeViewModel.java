@@ -1,19 +1,15 @@
 package com.example.appsale29032022.presentation.view.activity.home;
 
 import android.content.Context;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
 import com.example.appsale29032022.data.model.Food;
 import com.example.appsale29032022.data.model.Order;
 import com.example.appsale29032022.data.remote.dto.AppResource;
 import com.example.appsale29032022.data.remote.dto.FoodDTO;
 import com.example.appsale29032022.data.remote.dto.OrderDTO;
 import com.example.appsale29032022.data.repository.FoodRepository;
-import com.example.appsale29032022.data.repository.OrderRepository;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
@@ -25,13 +21,11 @@ import retrofit2.Response;
 
 public class HomeViewModel extends ViewModel {
     private final FoodRepository foodRepository;
-    private final OrderRepository oderRepository;
     private MutableLiveData<AppResource<List<Food>>> resourceFood;
     private MutableLiveData<AppResource<Order>> orderData = new MutableLiveData<>();
-
     public HomeViewModel(Context context) {
         foodRepository = new FoodRepository(context);
-        oderRepository = new OrderRepository(context);
+
         if (resourceFood == null) {
             resourceFood = new MutableLiveData<>();
         }
@@ -39,14 +33,12 @@ public class HomeViewModel extends ViewModel {
             orderData = new MutableLiveData<>();
         }
     }
-
     public LiveData<AppResource<List<Food>>> getFoods() {
         return resourceFood;
     }
     public LiveData<AppResource<Order>> getOrder() {
         return orderData;
     }
-
     public void fetchFoods() {
         resourceFood.setValue(new AppResource.Loading(null));
         Call<AppResource<List<FoodDTO>>> callFoods = foodRepository.fetchFoods();
@@ -82,52 +74,15 @@ public class HomeViewModel extends ViewModel {
                     }
                 }
             }
-
             @Override
             public void onFailure(Call<AppResource<List<FoodDTO>>> call, Throwable t) {
                 resourceFood.setValue(new AppResource.Error<>(t.getMessage()));
             }
         });
     }
-
     public void fetchOrder(String idFood) {
         orderData.setValue(new AppResource.Loading(null));
-        Call<AppResource<OrderDTO>> callOrder = oderRepository.addToCart(idFood);
-        callOrder.enqueue(new Callback<AppResource<OrderDTO>>() {
-            @Override
-            public void onResponse(Call<AppResource<OrderDTO>> call, Response<AppResource<OrderDTO>> response) {
-                if (response.isSuccessful()) {
-                    AppResource<OrderDTO> orderResponse = response.body();
-
-                    if (orderResponse.data != null) {
-                        OrderDTO orderDTO = orderResponse.data;
-                        orderData.setValue(
-                                new AppResource.Success(
-                                        new Order(
-                                                orderDTO.getId(),
-                                                orderDTO.getFoods(),
-                                                orderDTO.getId(),
-                                                orderDTO.getPrice(),
-                                                orderDTO.getStatus())));
-                    }
-                } else {
-                    try {
-                        JSONObject jsonObject = new JSONObject(response.errorBody().string());
-                        String message = jsonObject.getString("message");
-                        orderData.setValue(new AppResource.Error<>(message));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<AppResource<OrderDTO>> call, Throwable t) {
-                orderData.setValue(new AppResource.Error<>(t.getMessage()));
-            }
-        });
+        }
     }
 
-}
+

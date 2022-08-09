@@ -2,11 +2,11 @@ package com.example.appsale29032022.presentation.view.activity.onboard;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.BaseMenuPresenter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -27,12 +27,13 @@ import com.example.appsale29032022.presentation.view.activity.sign_in.SignInActi
 import com.example.appsale29032022.presentation.view.activity.splash.SplashActivity;
 import com.example.appsale29032022.presentation.view.adapter.OnboardDingPagerAdapter;
 
-public class OnboardDingActivity extends AppCompatActivity {
-
+public class OnboardDingActivity extends AppCompatActivity{
     TextView tvRequestLogin;
     LinearLayout btnGetStarted;
     ViewPager2 onboardDingViewPager;
     OnboardDingPagerAdapter onboardDingPagerAdapter;
+    private BaseMenuPresenter view;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,44 +43,45 @@ public class OnboardDingActivity extends AppCompatActivity {
         event();
         // Request Login Text
         setTextRequestLogin();
+        // ViewPager OnboardDing
     }
-
     private void event() {
         btnGetStarted.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view){
                 navigateLoginScreen();
             }
         });
     }
+        private void navigateLoginScreen () {
+                AppCache.getInstance(OnboardDingActivity.this)
+                        .setValue(AppConstant.ONBOARD_DING_FIRST_TIME_DISPLAY_KEY, true);
+                        commit();
+                Intent intent = new Intent(this, SignInActivity.class);
+                startActivity(intent);
+                finish();
+                overridePendingTransition(R.anim.alpha_fade_in, R.anim.alpha_fade_out);
+            }
+            private void commit () {
+            }
+            private void initial () {
+                tvRequestLogin = findViewById(R.id.textview_request_login);
+                btnGetStarted = findViewById(R.id.button_get_started);
+                onboardDingViewPager = findViewById(R.id.view_pager_onboardding);
 
-    private void navigateLoginScreen() {
-        AppCache.getInstance(OnboardDingActivity.this)
-                .setValue(AppConstant.ONBOARD_DING_FIRST_TIME_DISPLAY_KEY, true)
-                .commit();
+                onboardDingPagerAdapter = new OnboardDingPagerAdapter(this);
+                onboardDingViewPager.setAdapter(onboardDingPagerAdapter);
+            }
 
-        Intent intent = new Intent(this, SignInActivity.class);
-        startActivity(intent);
-        finish();
-        overridePendingTransition(R.anim.alpha_fade_in, R.anim.alpha_fade_out);
-    }
+            private void setTextRequestLogin () {
+                SpannableStringBuilder builder = new SpannableStringBuilder();
+                builder.append("Already Have An Account?");
+                builder.append(SpannedCommon.setClickColorLink("Login", this, () -> navigateLoginScreen()));
 
-    private void initial() {
-        tvRequestLogin = findViewById(R.id.textview_request_login);
-        btnGetStarted = findViewById(R.id.button_get_started);
-        onboardDingViewPager = findViewById(R.id.view_pager_onboard_ding);
+                tvRequestLogin.setText(builder);
+                tvRequestLogin.setHighlightColor(Color.TRANSPARENT);
+                tvRequestLogin.setMovementMethod(LinkMovementMethod.getInstance());
 
-        onboardDingPagerAdapter = new OnboardDingPagerAdapter(this);
-        onboardDingViewPager.setAdapter(onboardDingPagerAdapter);
-    }
+            }
+        }
 
-
-    private void setTextRequestLogin() {
-        SpannableStringBuilder builder = new SpannableStringBuilder();
-        builder.append("Already Have An Account?");
-        builder.append(SpannedCommon.setClickColorLink(" Login", this, () -> navigateLoginScreen()));
-        tvRequestLogin.setText(builder);
-        tvRequestLogin.setHighlightColor(Color.TRANSPARENT);
-        tvRequestLogin.setMovementMethod(LinkMovementMethod.getInstance());
-    }
-}

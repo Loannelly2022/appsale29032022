@@ -7,32 +7,25 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.example.appsale29032022.R;
 import com.example.appsale29032022.common.AppConstant;
 import com.example.appsale29032022.common.StringCommon;
 import com.example.appsale29032022.data.model.Food;
-
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> {
-
     List<Food> listFoods;
     Context context;
     private OnItemClickFood onItemClickFood;
-
     public FoodAdapter() {
         listFoods = new ArrayList<>();
     }
-
     public void updateListProduct(List<Food> data) {
         if (listFoods != null && listFoods.size() > 0) {
             listFoods.clear();
@@ -63,7 +56,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
     public int getItemCount() {
         return listFoods.size();
     }
-
     class FoodViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvName, tvAddress, tvPrice;
@@ -94,7 +86,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             tvPrice.setText(String.format("%s VND", StringCommon.formatCurrency(food.getPrice())));
             Glide.with(context)
                     .load(AppConstant.BASE_URL  + food.getImg())
-                    .placeholder(R.drawable.img_logo)
+                    .placeholder(R.drawable.ic_logo)
                     .into(img);
         }
     }
