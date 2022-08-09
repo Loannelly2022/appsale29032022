@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
-
 import com.example.appsale29032022.presentation.view.fragment.onboard.EatHealthyFragment;
 import com.example.appsale29032022.presentation.view.fragment.onboard.HealthyRecipesFragment;
 
@@ -36,5 +35,3 @@ public class OnboardDingPagerAdapter extends FragmentStateAdapter{
         return 2;
     }
 }
-
-
