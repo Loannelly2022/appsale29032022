@@ -12,6 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Appsale29032022">
         <activity
+            android:name=".presentation.view.adapter.FoodAdapter"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.view.activity.home.HomeViewModel"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.view.activity.sign_up.SignUpViewModel"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.view.activity.home.HomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.view.activity.sign_up.SignUpActivity"
             android:exported="false" />
         <activity

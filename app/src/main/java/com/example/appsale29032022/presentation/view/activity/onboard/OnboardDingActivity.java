@@ -56,13 +56,11 @@ public class OnboardDingActivity extends AppCompatActivity{
         private void navigateLoginScreen () {
                 AppCache.getInstance(OnboardDingActivity.this)
                         .setValue(AppConstant.ONBOARD_DING_FIRST_TIME_DISPLAY_KEY, true);
-                        commit();
+
                 Intent intent = new Intent(this, SignInActivity.class);
                 startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.alpha_fade_in, R.anim.alpha_fade_out);
-            }
-            private void commit () {
             }
             private void initial () {
                 tvRequestLogin = findViewById(R.id.textview_request_login);
@@ -76,7 +74,19 @@ public class OnboardDingActivity extends AppCompatActivity{
             private void setTextRequestLogin () {
                 SpannableStringBuilder builder = new SpannableStringBuilder();
                 builder.append("Already Have An Account?");
-                builder.append(SpannedCommon.setClickColorLink("Login", this, () -> navigateLoginScreen()));
+                int start = builder.length();
+                builder.append(" Log In");
+                builder.setSpan(new ClickableSpan() {
+                    @Override
+                    public void onClick(@NonNull View view) {
+                        navigateLoginScreen();
+                    }
+
+                    @Override
+                    public void updateDrawState(@NonNull TextPaint ds) {
+                        ds.setColor(getResources().getColor(R.color.primary));
+                    }
+                }, start, builder.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
 
                 tvRequestLogin.setText(builder);
                 tvRequestLogin.setHighlightColor(Color.TRANSPARENT);

@@ -19,8 +19,8 @@ public class SignInViewModel extends ViewModel{
     private final AuthenticationRepository authenticationRepository;
     private MutableLiveData<AppResource<User>>resourceUser;
 
-    public SignInViewModel(){
-        authenticationRepository = new AuthenticationRepository();
+    public SignInViewModel(Context context){
+        authenticationRepository = new AuthenticationRepository(context);
         if (resourceUser==null) {
             resourceUser = new MutableLiveData<>();
         }

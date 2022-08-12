@@ -20,10 +20,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.appsale29032022.R;
+import com.example.appsale29032022.common.AppConstant;
 import com.example.appsale29032022.common.SpannedCommon;
 import com.example.appsale29032022.common.StringCommon;
+import com.example.appsale29032022.data.local.AppCache;
 import com.example.appsale29032022.data.model.User;
 import com.example.appsale29032022.data.remote.dto.AppResource;
+import com.example.appsale29032022.presentation.view.activity.home.HomeActivity;
 import com.example.appsale29032022.presentation.view.activity.sign_up.SignUpActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -48,8 +51,15 @@ public class SignInActivity extends AppCompatActivity {
             public void onChanged(AppResource<User> userAppResource) {
                 switch (userAppResource.status) {
                     case SUCCESS:
-                        Toast.makeText(SignInActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignInActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                         layoutLoading.setVisibility(View.GONE);
+                        AppCache.getInstance(SignInActivity.this)
+                                .setValue(AppConstant.TOKEN_KEY, userAppResource.data.getToken())
+                                .commit();
+                        Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        finish();
+                        overridePendingTransition(R.anim.alpha_fade_in, R.anim.alpha_fade_out);
                         break;
                     case LOADING:
                         layoutLoading.setVisibility(View.VISIBLE);
@@ -89,15 +99,15 @@ public class SignInActivity extends AppCompatActivity {
             @NonNull
             @Override
             public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-                return (T) new SignInViewModel();
+                return (T) new SignInViewModel(SignInActivity.this);
             }
         }).get(SignInViewModel.class);
     }
     private void setTextRegister() {
         SpannableStringBuilder builder = new SpannableStringBuilder();
         builder.append("Don't have an account?");
-
         builder.append(SpannedCommon.setClickColorLink("Register", this, () -> {
+
             startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
             overridePendingTransition(R.anim.alpha_fade_in, R.anim.alpha_fade_out);
         }));
