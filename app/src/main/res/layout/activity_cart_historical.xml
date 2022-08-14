@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".presentation.view.activity.cart.history.HistoricalCartActivity">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.7"
+        android:text="Lịch sử giỏ hàng"
+        android:textSize="25sp"
+        android:textColor="@color/primary"
+        android:textStyle="italic"
+        android:paddingTop="10dp"
+        android:paddingStart="20dp"/>
+
+    <TextView
+        android:id="@+id/textview_date_history"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:layout_marginStart="20dp"
+        android:text="Ngày"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="italic" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_cart_history"
+        android:layout_weight="9.9"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/layout_icon_order_cart" />
+
+    <TextView
+        android:id="@+id/textview_sum_price_history"
+        android:layout_width="wrap_content"
+        android:layout_height="3dp"
+        android:layout_weight="0.7"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Tổng tiền: 1000"
+        android:textColor="@color/primary"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+    <include
+        android:id="@+id/layout_loading"
+        layout="@layout/layout_loading"
+        android:visibility="gone" />
+</LinearLayout>

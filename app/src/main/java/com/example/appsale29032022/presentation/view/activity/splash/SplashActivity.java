@@ -19,9 +19,9 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
         navigateToDestination();
     }
+
     private void navigateToDestination() {
         new Handler().postDelayed(() -> {
             Boolean isFirstTimeDisplay = (Boolean) AppCache.getInstance(SplashActivity.this)
@@ -32,14 +32,15 @@ public class SplashActivity extends AppCompatActivity {
             } else {
                 String token = (String) AppCache.getInstance(SplashActivity.this).getValue(AppConstant.TOKEN_KEY);
                 if (token != null && !token.isEmpty()) {
-                    intent = new Intent(SplashActivity.this, HomeActivity.class);
-                } else {
                     intent = new Intent(SplashActivity.this, SignInActivity.class);
+
+                } else {
+                    intent = new Intent(SplashActivity.this, HomeActivity.class);
                 }
             }
-               startActivity(intent);
-               finish();
-               overridePendingTransition(R.anim.alpha_fade_in, R.anim.alpha_fade_out);
-       },AppConstant.TIME_MILLISECOND_DELAY);
+            startActivity(intent);
+            finish();
+            overridePendingTransition(R.anim.alpha_fade_in, R.anim.alpha_fade_out);
+        }, AppConstant.TIME_MILLISECOND_DELAY);
     }
 }

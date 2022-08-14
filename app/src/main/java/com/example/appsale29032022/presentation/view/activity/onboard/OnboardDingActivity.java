@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.BaseMenuPresenter;
 import androidx.viewpager2.widget.ViewPager2;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -18,7 +17,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.appsale29032022.R;
 import com.example.appsale29032022.common.AppConstant;
 import com.example.appsale29032022.common.SpannedCommon;
@@ -62,6 +60,8 @@ public class OnboardDingActivity extends AppCompatActivity{
                 finish();
                 overridePendingTransition(R.anim.alpha_fade_in, R.anim.alpha_fade_out);
             }
+            private void commit () {
+            }
             private void initial () {
                 tvRequestLogin = findViewById(R.id.textview_request_login);
                 btnGetStarted = findViewById(R.id.button_get_started);
@@ -70,7 +70,6 @@ public class OnboardDingActivity extends AppCompatActivity{
                 onboardDingPagerAdapter = new OnboardDingPagerAdapter(this);
                 onboardDingViewPager.setAdapter(onboardDingPagerAdapter);
             }
-
             private void setTextRequestLogin () {
                 SpannableStringBuilder builder = new SpannableStringBuilder();
                 builder.append("Already Have An Account?");
@@ -87,11 +86,9 @@ public class OnboardDingActivity extends AppCompatActivity{
                         ds.setColor(getResources().getColor(R.color.primary));
                     }
                 }, start, builder.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-
                 tvRequestLogin.setText(builder);
                 tvRequestLogin.setHighlightColor(Color.TRANSPARENT);
                 tvRequestLogin.setMovementMethod(LinkMovementMethod.getInstance());
-
             }
         }
 

@@ -23,7 +23,6 @@ import com.example.appsale29032022.presentation.view.activity.sign_in.SignInActi
 import com.google.android.material.textfield.TextInputEditText;
 
 public class SignUpActivity extends AppCompatActivity {
-
     TextInputEditText inputName, inputEmail, inputPassword, inputPhone, inputAddress;
     LinearLayout btnSignUp, layoutLoading;
     SignUpViewModel signUpViewModel;

@@ -22,4 +22,10 @@ public class StringCommon {
         public static String formatCurrency(int number) {
             return new DecimalFormat("#,###").format(number);
     }
+    public static String formatDate(String date) {
+        String[] _date = date.split("T");
+        String[] time = _date[1].split(":");
+        int hour = Integer.parseInt(time[0])+7;
+        return _date[0]+" "+ hour+":"+time[1];
+    }
 }
